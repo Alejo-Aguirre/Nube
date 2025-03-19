@@ -2,36 +2,43 @@ package main
 
 import (
 	"fmt"
+	"math/rand"
 	"os"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 func main() {
 	// Directorio que se va a listar
+	//directorio := "C:/Users/lenovo/Desktop/nube/Goolang/Nube"
+
 	var directorio string
 	fmt.Print("Ingrese la ruta del directorio: ")
 	fmt.Scanln(&directorio)
-
+	
 	// Formatos de archivo permitidos (solo imágenes en este caso)
-	formatosPermitidos := []string{".jpg", ".png", ".jpeg"}
+	formatosPermitidos := []string{".jpg", ".png"}
 
 	// Llamar a la función para listar archivos y obtener los nombres en un slice
-	nombresArchivos := listarArchivos(directorio, formatosPermitidos)
+	nombresArchivos := listarArchivosAzar(directorio, formatosPermitidos)
 
-	// Determinar la cantidad de imágenes disponibles
-	cantidadImagenes := len(nombresArchivos)
-
-	// Imprimir los nombres de los archivos y la cantidad de imágenes
-	fmt.Println("Nombres de los archivos de imagen:")
-	for _, nombre := range nombresArchivos {
-		fmt.Println(nombre)
+	// Verificar si hay archivos de imagen
+	if len(nombresArchivos) == 0 {
+		fmt.Println("No se encontraron archivos de imagen en el directorio.")
+		return
 	}
-	fmt.Printf("Cantidad de imágenes disponibles: %d\n", cantidadImagenes)
 
+	// Seleccionar un nombre de archivo al azar
+	rand.Seed(time.Now().UnixNano()) // Inicializar la semilla aleatoria
+	indiceAleatorio := rand.Intn(len(nombresArchivos)) // Generar un índice aleatorio
+	archivoSeleccionado := nombresArchivos[indiceAleatorio]
+
+	// Imprimir solo el nombre del archivo seleccionado al azar
+	fmt.Println(archivoSeleccionado)
 }
 
-func listarArchivos(directorio string, formatosPermitidos []string) []string {
+func listarArchivosAzar(directorio string, formatosPermitidos []string) []string {
 	// Slice para almacenar los nombres de los archivos
 	var nombresArchivos []string
 
@@ -63,5 +70,7 @@ func listarArchivos(directorio string, formatosPermitidos []string) []string {
 	if err != nil {
 		fmt.Println("Error al recorrer el directorio:", err)
 	}
+
+	// Retornar el slice con los nombres de los archivos
 	return nombresArchivos
 }
