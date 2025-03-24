@@ -142,6 +142,31 @@
             </div>
             {{end}}
         </div>
+
+
+        <a class="text-center">Directorio 1</a>
+        <div class="gallery grid grid-cols-2 gap-4 p-4">
+            {{range .Directorio1}}
+            <div class="image-card bg-white shadow-md rounded-lg overflow-hidden">
+                <div class="image-container">
+                    <img src="{{.Base64}}" alt="{{.Name}}" class="w-full h-48 object-cover">
+                </div>
+                <div class="image-name text-center text-gray-700 font-semibold p-2">{{.Name}}</div>
+            </div>
+            {{end}}
+        </div>
+        
+        <a class="text-center">Directorio 2</a>
+        <div class="gallery grid grid-cols-2 gap-4 p-4">
+            {{range .Directorio2}}
+            <div class="image-card bg-white shadow-md rounded-lg overflow-hidden">
+                <div class="image-container">
+                    <img src="{{.Base64}}" alt="{{.Name}}" class="w-full h-48 object-cover">
+                </div>
+                <div class="image-name text-center text-gray-700 font-semibold p-2">{{.Name}}</div>
+            </div>
+            {{end}}
+        </div>
         
 
         <div class="server-info">
@@ -149,6 +174,7 @@
             <div class="info-item"><strong>Host:</strong> {{.Hostname}}</div>
             <div class="info-item"><strong>Puerto:</strong> {{.Port}}</div>
             <div class="info-item"><strong>Directorio de imágenes:</strong> {{.ImageDir}}</div>
+            <div class="info-item"><strong>Directorio de imágenes 2:</strong> {{.ImageDir2}}</div>
         </div>
 
         <div class="team">{{.Team}}</div>
